@@ -2,8 +2,7 @@
 
 ## Project Overview
 
-This project involves the design and implementation of the ASCON128 authenticated encryption algorithm using **SystemVerilog**. ASCON128 is a lightweight cryptographic algorithm designed for authenticated encryption with associated data (AEAD), ensuring both confidentiality and authenticity of communications.
-
+This project involves the design and implementation of the ASCON128 authenticated encryption algorithm using **SystemVerilog**.
 ## Features
 
 - **Authenticated Encryption**: Ensures both confidentiality and authenticity of messages.
