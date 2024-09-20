@@ -1,0 +1,54 @@
+#!/bin/bash
+
+export PROJECTNAME="."
+
+
+# Remove existing librairies
+vdel -lib LIB_RTL -all
+vdel -lib LIB_BENCH -all
+
+# Build librairies
+vlib LIB/LIB_RTL
+vmap LIB_RTL LIB/LIB_RTL
+vlib LIB/LIB_BENCH
+vmap LIB_BENCH LIB/LIB_BENCH
+
+# Define compilation options	
+VLOG_OPTS="-sv +acc -svinputport=net"
+
+# Compile all RTL sources
+vlog $VLOG_OPTS -work LIB_RTL ./SRC/RTL/ascon_pack.sv
+vlog $VLOG_OPTS -work LIB_RTL ./SRC/RTL/add_const.sv
+vlog $VLOG_OPTS -work LIB_RTL ./SRC/RTL/s_box.sv
+vlog $VLOG_OPTS -work LIB_RTL ./SRC/RTL/couche_substitution.sv
+vlog $VLOG_OPTS -work LIB_RTL ./SRC/RTL/couche_diffusion.sv
+vlog $VLOG_OPTS -work LIB_RTL ./SRC/RTL/permutation_finale.sv
+vlog $VLOG_OPTS -work LIB_RTL ./SRC/RTL/mux_state.sv
+vlog $VLOG_OPTS -work LIB_RTL ./SRC/RTL/register_w_en.sv
+vlog $VLOG_OPTS -work LIB_RTL ./SRC/RTL/state_register_w_en.sv
+vlog $VLOG_OPTS -work LIB_RTL ./SRC/RTL/xor_begin_perm.sv
+vlog $VLOG_OPTS -work LIB_RTL ./SRC/RTL/xor_end_perm.sv
+vlog $VLOG_OPTS -work LIB_RTL ./SRC/RTL/compteur_double_init.sv
+vlog $VLOG_OPTS -work LIB_RTL ./SRC/RTL/compteur_simple_init.sv
+vlog $VLOG_OPTS -work LIB_RTL ./SRC/RTL/FSM_moore.sv
+vlog $VLOG_OPTS -work LIB_RTL ./SRC/RTL/ascon_top.sv
+
+
+# Compile all BENCH sources
+vlog $VLOG_OPTS -work LIB_BENCH -L LIB_RTL SRC/BENCH/tb_add_const.sv
+vlog $VLOG_OPTS -work LIB_BENCH -L LIB_RTL SRC/BENCH/bench_sbox.sv
+vlog $VLOG_OPTS -work LIB_BENCH -L LIB_RTL SRC/BENCH/couche_substitution_tb.sv
+vlog $VLOG_OPTS -work LIB_BENCH -L LIB_RTL SRC/BENCH/couche_diffusion_tb.sv
+vlog $VLOG_OPTS -work LIB_BENCH -L LIB_RTL SRC/BENCH/permutation_finale_tb.sv
+vlog $VLOG_OPTS -work LIB_BENCH -L LIB_RTL SRC/BENCH/ascon_top_tb.sv
+
+# Simulation
+# /!\ Uncomment only one vsim command below
+#vsim -L LIB_RTL LIB_BENCH.tb_add_const
+#vsim -L LIB_RTL LIB_BENCH.bench_sbox
+#vsim -L LIB_RTL LIB_BENCH.couche_substitution_tb
+#vsim -L LIB_RTL LIB_BENCH.couche_diffusion_tb
+#vsim -L LIB_RTL LIB_BENCH.permutation_finale_tb
+vsim -L LIB_RTL LIB_BENCH.ascon_top_tb
+
+
