@@ -54,7 +54,7 @@ The top-level module `ascon_top` contains:
 - **Output Ports**:
   - `cipher_o`: 64-bit encrypted output data.
   - `cipher_valid_o`: Signal indicating valid cipher output.
-  - `tag_o`: 128-bit authentication tag.
+  - `tag_o`:  128-bit authentication tag.
   - `end_o`: Signal indicating the end of the encryption process.
 
 ### Submodules
