@@ -9,6 +9,10 @@ This project involves the design and implementation of the ASCON128 authenticate
 - **ASCON128 Algorithm**: A lightweight encryption algorithm that uses a sponge function for authenticated encryption.
 - **SystemVerilog Modeling**: Implement the ASCON128 algorithm in hardware using SystemVerilog.
 
+## Language and Software
+- Programming language : System Verilog
+- Software : Modelsim
+
 ## Algorithm Description
 
 ### ASCON128 Basics
